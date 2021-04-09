@@ -1,0 +1,26 @@
+#duplicated values
+train_features_T = train_features.T
+train_features_T.shape
+print(train_features_T.duplicated().sum())
+unique_features = train_features_T.drop_duplicates(keep='first').T
+unique_features.shape
+duplicated_features = [dup_col for dup_col in train_features.columns if dup_col not in unique_features.columns]
+duplicated_features
+
+
+#Unique values
+train_features = train_features.loc[:,train_features.apply(pd.Series.nunique) != 1]
+
+
+
+# get number of unique values for each column
+counts = train_features.nunique()
+# record columns to delete
+to_del = [i for i,v in enumerate(counts) if v == 1]
+print(to_del)
+# drop single unique columns
+train_features.drop(to_del, axis=1, inplace=True)
+print(train_features.shape
+
+#Inversing the encoding
+#train_enc.inverse_transform(new_arr)
